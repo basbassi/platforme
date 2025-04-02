@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Accueil</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'salon' %}">Salon marocain</a></li>
+    <li class="nav-item"><a class="nav-link " href="{% url 'chambre' %}">Chambre</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'bureau' %}">Bureau</a></li>
+    <li class="nav-item"><a class="nav-link active" href="{% url 'contact' %}">Contact</a></li>
+</ul>
+<br>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Contactez-nous</h2>
+    
+    <div class="row">
+        <!-- Formulaire de contact -->
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h4 class="mb-3">Envoyez-nous un message</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Votre nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+                </form>
+
+                <!-- Affichage des messages -->
+                {% if messages %}
+                    <div class="alert alert-success mt-3">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Informations de contact -->
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h4 class="mb-3">Nos coordonnées</h4>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-geo-alt"></i> Adresse : Amria 1, Rue 11, Nemuro 11</li>
+                    <li><i class="bi bi-envelope"></i> Email : contact@sof-tech.com</li>
+                    <li><i class="bi bi-phone"></i> Téléphone : +212 6 1234 5678</li>
+                </ul>
+                <h4 class="mt-4">Suivez-nous</h4>
+                <div>
+                    <a href="#" class="btn btn-outline-primary me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-danger me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-info"><i class="bi bi-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carte Google Maps -->
+    <div class="mt-5">
+        <h4 class="text-center">Notre emplacement</h4>
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1215.0098740168103!2d-6.355495940193228!3d32.337855202679414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda387b4d7c983af%3A0xa9d40578953741d6!2z2YbYrNin2LEg2KjZhtmKINmF2YTYp9mE!5e0!3m2!1sar!2sma!4v1742923290692!5m2!1sar!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

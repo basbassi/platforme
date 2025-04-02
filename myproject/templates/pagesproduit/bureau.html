@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bureaux{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Accueil</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'salon' %}">Salon marocain</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'chambre' %}">Chambre</a></li>
+    <li class="nav-item"><a class="nav-link active" href="{% url 'bureau' %}">Bureau</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+</ul>
+
+<!-- Liste des bureaux -->
+<div class="container mt-5">
+    <div class="row">
+        {% for x in pro %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img style="width: 100%;" src="{{ x.image.url }}" class="card-img-top" alt="Bureau">
+                    <div class="card-body">
+                        <h5 class="card-title">Bureau {{ forloop.counter }}</h5>
+                        <p class="card-text">Description rapide du bureau.</p>
+                        <!-- Lien vers la page de description du produit -->
+                        <a href="{% url 'description' %}?image={{ x.image.url }}&nom=Bureau%20{{ forloop.counter }}&desc=Bureau%20de%20qualité%20supérieure" class="btn btn-primary">Voir Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

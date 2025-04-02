@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier l'image{% endblock %}
+
+{% block content %}
+<h2>Modifier l'image du produit : {{ produit.name }}</h2>
+
+<!-- Formulaire de modification d'image -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
+
+{% if produit.image %}
+    <h3>Image actuelle :</h3>
+    <img src="{{ produit.image.url }}" alt="{{ produit.name }}" width="200">
+{% else %}
+    <p>Aucune image disponible.</p>
+{% endif %}
+{% endblock %}

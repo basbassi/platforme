@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Salon Marocain{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Accueil</a></li>
+    <li class="nav-item"><a class="nav-link active" href="{% url 'salon' %}">Salon marocain</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'chambre' %}">Chambre</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'bureau' %}">Bureau</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+</ul>
+
+<!-- Liste des salons -->
+<div class="container mt-5">
+    <div class="row">
+        {% for salon in salon %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img style="width: 100%;" src="{{ salon.image.url }}" class="card-img-top" alt="Salon">
+                    <div class="card-body">
+                        <h5 class="card-title">Salon {{ forloop.counter }}</h5>
+                        <p class="card-text">Description rapide du salon.</p>
+                        <a href="{% url 'description' %}?image={{ salon.image.url }}&nom=Salon%20{{ forloop.counter }}&desc=Salon%20marocain%20de%20qualité%20supérieure" class="btn btn-primary">Voir Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
